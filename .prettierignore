@@ -1,0 +1,12 @@
+# dependencies
+node_modules
+
+# build artifacts
+.nuxt
+.output
+dist
+
+# generated code
+prisma/generated
+prisma
+**/*.min.js

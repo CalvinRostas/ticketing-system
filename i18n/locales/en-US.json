@@ -1,0 +1,71 @@
+{
+    "error": {
+        "general": {
+            "title": "Error"
+        },
+        "emailRequired": "Email is required",
+        "nameRequired": "Name is required",
+        "colorRequired": "Color is required",
+        "passwordMinLength": "Password must be at least 4 characters long",
+        "invalidLogin": "Invalid email or password.",
+        "noAccountFound": "No account found with the provided email.",
+        "invalidRegister": "Invalid registration details.",
+        "userAlreadyExists": "A user with this email already exists. Please try logging in.",
+        "noValidId": "No valid ID provided",
+        "statusNotFound": "Status not found",
+        "noValidPriority": "No valid priority provided",
+        "priorityNotFound": "Priority not found",
+        "noValidCategory": "No valid category provided",
+        "categoryNotFound": "Category not found",
+        "noValidTicket": "No valid ticket provided"
+    },
+    "general": {
+        "create": "Create",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "confirmationMessage": "This action cannot be undone. Are you sure you want to proceed?",
+        "edit": "Edit",
+        "name": "Name",
+        "search": "Search",
+        "description": "Description",
+        "color": "Color",
+        "actions": "Actions"
+    },
+    "status": {
+        "createStatus": "Create Status",
+        "createStatusDesc": "Fill in the details to create a new status.",
+        "editStatus": "Edit Status",
+        "editStatusDesc": "Modify the details of the status.",
+        "deleteStatus": "Delete Status",
+        "deleteStatusDesc": "Are you sure you want to delete this status? This action cannot be undone.",
+        "title": "Status|Statuses",
+        "description": "A list of all the statuses in your app including their name, description, and color."
+    },
+    "priority": {
+        "createPriority": "Create Priority",
+        "createPriorityDesc": "Fill in the details to create a new priority.",
+        "editPriority": "Edit Priority",
+        "editPriorityDesc": "Modify the details of the priority.",
+        "deletePriority": "Delete Priority",
+        "deletePriorityDesc": "Are you sure you want to delete this priority? This action cannot be undone.",
+        "title": "Priority|Priorities",
+        "description": "A list of all the priorities in your app including their name, description, and color."
+    },
+    "category": {
+        "createCategory": "Create Category",
+        "createCategoryDesc": "Fill in the details to create a new category.",
+        "editCategory": "Edit Category",
+        "editCategoryDesc": "Modify the details of the category.",
+        "deleteCategory": "Delete Category",
+        "deleteCategoryDesc": "Are you sure you want to delete this category? This action cannot be undone.",
+        "title": "Category|Categories",
+        "description": "A list of all the categories in your app including their name, description, and color."
+    },
+    "ticket": {
+        "titleRequired": "Title is required.",
+        "priorityRequired": "Priority is required.",
+        "statusRequired": "Status is required.",
+        "categoriesRequired": "Categories are required.",
+        "descriptionRequired": "Description is required."
+    }
+}

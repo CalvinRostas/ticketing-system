@@ -1,0 +1,24 @@
+info:
+  name: Create Status
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://localhost:3000/api/ticket/status
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Open",
+        "description": "Indicates that a ticket is still open for grabs.",
+        "color": "#FFFFFF"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

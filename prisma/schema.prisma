@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/**
+ * This should be put into every model
+ * Sadly Prisma v7 does not support a better way for adding common fields
+ * They have to be put into every model explicitly.
+ * createdAt DateTime @default(now())
+ * updatedAt DateTime @updatedAt
+ * deletedAt   DateTime?
+ * isDeleted   Boolean   @default(false)
+ */
+
+model Users {
+  id              Int           @id @default(autoincrement())
+  email           String        @unique
+  password        String
+  firstname       String?
+  lastname        String?
+  permissions     Permissions[] @relation("UserPermissions")
+  tickets         Tickets[]     @relation("UserTickets")
+  authoredTickets Tickets[]     @relation("TicketAuthor")
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  isDeleted Boolean   @default(false)
+}
+
+model Permissions {
+  id          Int     @id @default(autoincrement())
+  name        String  @unique
+  description String?
+  users       Users[] @relation("UserPermissions")
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  isDeleted Boolean   @default(false)
+}
+
+/**
+ * ===== TICKET SECTION START =====
+ */
+
+model Tickets {
+  id          Int          @id @default(autoincrement())
+  title       String
+  description String?
+  status      Statuses     @relation("StatusTickets", fields: [statusId], references: [id])
+  statusId    Int
+  priority    Priorities   @relation("PriorityTickets", fields: [priorityId], references: [id])
+  priorityId  Int
+  categories  Categories[] @relation("CategoryTickets")
+  authorId    Int
+  author      Users        @relation("TicketAuthor", fields: [authorId], references: [id])
+  assignees   Users[]      @relation("UserTickets")
+  dueDate     DateTime?
+  isClosed    Boolean      @default(false)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  isDeleted Boolean   @default(false)
+}
+
+model Statuses {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  color       String?
+  tickets     Tickets[] @relation("StatusTickets")
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  isDeleted Boolean   @default(false)
+}
+
+model Categories {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String?
+  color       String?
+  tickets     Tickets[] @relation("CategoryTickets")
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  isDeleted Boolean   @default(false)
+}
+
+model Priorities {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  color       String?
+  tickets     Tickets[] @relation("PriorityTickets")
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  isDeleted Boolean   @default(false)
+}
+
+/**
+ * ===== TICKET SECTION END =====
+ */
