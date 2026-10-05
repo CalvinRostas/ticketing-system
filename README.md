@@ -5,9 +5,9 @@
 
 1. Clone repo via git clone or something similar like GitHub Desktop
 2. Install all dependencies using `bun i` or `bun install`
-3. Use the `.env.template` file and create your own `.env`
-3.1. Fill in your own session password (atleast 32 characters long)
-3.2. Fill in your database (PostgreSQL) connection string
+3. Use the `.env.template` file and create your own `.env`   
+3.1. Fill in your own session password (atleast 32 characters long)  
+3.2. Fill in your database (PostgreSQL) connection string  
 4. Use `bun run prisma:generate` to generate the Prisma Client (Database ORM)
 5. Start the development server using `bun run dev`
 
