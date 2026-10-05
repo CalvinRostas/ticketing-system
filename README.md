@@ -1,75 +1,29 @@
-# Nuxt Minimal Starter
+# Project Setup
+### Prerequisites
+- Running PostgreSQL database (e.g. per docker)
+- Bun
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+1. Clone repo via git clone or something similar like GitHub Desktop
+2. Install all dependencies using `bun i` or `bun install`
+3. Use the `.env.template` file and create your own `.env`
+3.1. Fill in your own session password (atleast 32 characters long)
+3.2. Fill in your database (PostgreSQL) connection string
+4. Use `bun run prisma:generate` to generate the Prisma Client (Database ORM)
+5. Start the development server using `bun run dev`
 
-## Setup
+# What is to come?
+- Initial seeding for the database (for easier setup)
+- better setup process (per Web UI)
 
-Make sure to install dependencies:
+# Technology used
+- Bun
+- Nuxt 4
+- PrismaORM
+- Zod
+- VueUse
+- UI-Thing
 
-```bash
-# npm
-npm install
+# Data Validation
+Data is validated twice. Once on the client side and once on the server side to ensure that the correct error messages are shown to the user and the correct data is being handled on the server.
 
-# pnpm
-pnpm install
 
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
