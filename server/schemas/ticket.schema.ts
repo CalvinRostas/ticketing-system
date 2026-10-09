@@ -38,3 +38,9 @@ export const ticketFilterSchema = z.object({
   page: z.coerce.number().int().positive().default(1),
   pageSize: z.coerce.number().int().positive().max(100).default(20)
 })
+
+export const commentSchema = z.object({
+  content: z.string().min(1, "comment.contentRequired"),
+  authorId: z.number().int().positive(),
+  ticketId: z.number().int().positive()
+})

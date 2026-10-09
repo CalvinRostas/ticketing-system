@@ -17,8 +17,6 @@ export default defineEventHandler(async (event) => {
         pageSize: query.pageSize
     })
 
-    console.log(parsedFilters)
-
     if (!parsedFilters.success) {
         throw createError({
             statusCode: 400,
@@ -69,9 +67,6 @@ export default defineEventHandler(async (event) => {
             isClosed: filters.isClosed
         }
     }
-
-    console.log("LAST WHERE")
-    console.log(where)
 
     const [tickets, total] = await Promise.all([
         prisma.tickets.findMany({

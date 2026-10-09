@@ -37,6 +37,7 @@
     "nuxt-auth-utils": "0.5.30",
     "pg": "^8.22.0",
     "reka-ui": "^2.10.4",
+    "sanitize-html": "^2.18.0",
     "tailwind-merge": "^3.7.0",
     "tailwind-variants": "^3.3.1",
     "tailwindcss": "^4.3.3",
@@ -47,6 +48,7 @@
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
     "@iconify-json/lucide": "^1.2.136",
+    "@types/sanitize-html": "^2.16.2",
     "@yuta-inoue-ph/nuxt-vcalendar": "^1.1.4",
     "prettier": "^3.9.8",
     "prettier-plugin-tailwindcss": "^0.8.1",

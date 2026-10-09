@@ -152,22 +152,7 @@ import { EditorContent, useEditor } from "@tiptap/vue-3";
 
 const editor = useEditor({
     extensions: [StarterKit],
-    content: `
-      <h2>Welcome to Tiptap</h2>
-      <p>This is a custom editor instance with <strong>grouped icon buttons</strong> and <em>tooltips</em>. Try editing this content!</p>
-      <h3>Features:</h3>
-      <ul>
-        <li>Text formatting (bold, italic, strike)</li>
-        <li>Multiple heading levels</li>
-        <li>Bullet and ordered lists</li>
-        <li>Code blocks and blockquotes</li>
-      </ul>
-      <blockquote>
-        <p>This is a blockquote. Great for highlighting important information.</p>
-      </blockquote>
-      <pre><code>// This is a code block
-console.log('Hello, Tiptap!');</code></pre>
-    `,
+    content: ``,
     editorProps: {
         attributes: {
             class:

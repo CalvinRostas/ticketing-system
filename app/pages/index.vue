@@ -58,10 +58,10 @@
       <tbody aria-hidden="true" class="table-row h-2" />
       <UiTableBody class="[&_td:first-child]:rounded-l-lg [&_td:last-child]:rounded-r-lg">
         <UiTableRow v-for="item in ticketData?.data" :key="item.id"
-          class="odd:bg-muted/50 odd:hover:bg-muted/50 border-none hover:bg-transparent">
+          class="odd:bg-muted/50 odd:hover:bg-muted/90 border-none hover:bg-muted/90 cursor-pointer" @click="navigateTo($localePath(`/ticket/${item.id}`))">
           <UiTableCell class="py-2.5">{{ item.id }}</UiTableCell>
           <UiTableCell class="py-2.5 font-medium">{{ item.title }}</UiTableCell>
-          <UiTableCell class="py-2.5">{{ item.description }}</UiTableCell>
+          <UiTableCell class="py-2.5">{{ formatDescription(item.description!) }}</UiTableCell>
           <UiTableCell class="py-2.5">
             <UtilBadge :label="item.priority.name" :color="item.priority.color!" />
           </UiTableCell>
@@ -124,7 +124,12 @@ const { data: ticketData, error: ticketError } = await useFetch("/api/ticket/lis
   }
 })
 
-console.log(ticketData.value)
+const formatDescription = (description: string) => {
+  description = description.replace(/<\/?[^>]+(>|$)/g, "") // Remove all HTML tags
+  if (!description) return ""
+  if (description.length <= 50) return description
+  return description.slice(0, 50) + "..."
+}
 </script>
 
 <style scoped></style>

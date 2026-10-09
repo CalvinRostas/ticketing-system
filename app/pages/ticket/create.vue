@@ -179,6 +179,7 @@
 
 <script setup lang="ts">
 import { treeifyError } from "zod"
+import sanitizeHtml from "sanitize-html"
 import dayjs from "dayjs";
 
 definePageMeta({
@@ -244,9 +245,10 @@ const getCategoryById = (categoryId: number): HelperType => {
 
 const handleCreation = async () => {
     creationError.value = null
+    const sanitizedDescription = sanitizeHtml(createTicketData.value.description)
     const { data, error } = await useFetch('/api/ticket/create', {
         method: 'POST',
-        body: { ...createTicketData.value, dueDate: date.value }
+        body: { ...createTicketData.value, description: sanitizedDescription, dueDate: date.value }
     })
 
     if (error.value) {

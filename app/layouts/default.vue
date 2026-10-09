@@ -307,7 +307,7 @@ const data = {
             items: [
                 {
                     title: "Create Ticket",
-                    url: localePath("/tickets/create"),
+                    url: localePath("/ticket/create"),
                 },
                 {
                     title: "All Tickets",

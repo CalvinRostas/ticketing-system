@@ -25,6 +25,7 @@ model Users {
   permissions     Permissions[] @relation("UserPermissions")
   tickets         Tickets[]     @relation("UserTickets")
   authoredTickets Tickets[]     @relation("TicketAuthor")
+  comments        Comments[]    @relation("UserComments")
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -57,6 +58,7 @@ model Tickets {
   priority    Priorities   @relation("PriorityTickets", fields: [priorityId], references: [id])
   priorityId  Int
   categories  Categories[] @relation("CategoryTickets")
+  comments    Comments[]   @relation("TicketComments")
   authorId    Int
   author      Users        @relation("TicketAuthor", fields: [authorId], references: [id])
   assignees   Users[]      @relation("UserTickets")
@@ -106,6 +108,20 @@ model Priorities {
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
   isDeleted Boolean   @default(false)
+}
+
+model Comments {
+  id        Int      @id @default(autoincrement())
+  content   String
+  ticketId  Int
+  ticket    Tickets  @relation("TicketComments", fields: [ticketId], references: [id])
+  authorId  Int
+  author    Users    @relation("UserComments", fields: [authorId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+  isDeleted Boolean  @default(false)
 }
 
 /**

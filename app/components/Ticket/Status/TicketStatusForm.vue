@@ -105,8 +105,6 @@ const handleSubmit = async () => {
 
     emits('action-success', parsedData.data)
     alertOpen.value = false;
-    // Proceed with the valid data
-    console.log(parsedData.data)
 }
 
 const handleEdit = async (id: number) => {

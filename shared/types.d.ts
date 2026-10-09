@@ -79,4 +79,13 @@ export type Status = {
     isDeleted: boolean;
 }
 
+export type Comment = {
+    id: number;
+    content: string;
+    author: User;
+    createdAt: Date;
+    updatedAt: Date;
+    deletedAt?: Date;
+    isDeleted: boolean;
+}
 /* ===== TICKET TYPES SECTION END ===== */

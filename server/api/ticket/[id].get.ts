@@ -4,11 +4,22 @@ export default defineEventHandler(async (event) => {
     }
 
     const id = event.context.params.id
-    // Fetch the ticket from your database using the id
 
     const ticket = await prisma.tickets.findUnique({
         where: { 
             id: Number(id), 
+        },
+        include: {
+            status: true,
+            priority: true,
+            author: true,
+            categories: true,
+            comments: {
+                include: {
+                    author: true
+                }
+            },
+            assignees: true,
         }
     })
 
