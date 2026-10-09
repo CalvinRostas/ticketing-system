@@ -1,11 +1,11 @@
 export type ZodErrorType = {
-    errors: string[]
-    properties: {
-        [key: string]: {
-            errors: string[]
-        }
-    }
-}
+  errors: string[];
+  properties: {
+    [key: string]: {
+      errors: string[];
+    };
+  };
+};
 
 /**
  * Creates an array of error translation keys that can be used by the "GenericError" component.
@@ -13,11 +13,11 @@ export type ZodErrorType = {
  * @returns array of error translations keys
  */
 export const formatError = (error: string | ZodErrorType): string[] => {
-    if (typeof error === "string") {
-        if (error.trim() === "") {
-            return [];
-        }
-        return [error];
+  if (typeof error === "string") {
+    if (error.trim() === "") {
+      return [];
     }
-    return [...error.errors, ...Object.values(error.properties).flatMap(p => p.errors)];
+    return [error];
+  }
+  return [...error.errors, ...Object.values(error.properties).flatMap((p) => p.errors)];
 };

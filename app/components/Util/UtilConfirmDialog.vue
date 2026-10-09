@@ -6,9 +6,9 @@
       </UiAlertDialogTrigger>
       <UiAlertDialogContent @escape-key-down="open = false">
         <UiAlertDialogHeader>
-          <UiAlertDialogTitle>{{ $t('general.confirm') }}</UiAlertDialogTitle>
+          <UiAlertDialogTitle>{{ $t("general.confirm") }}</UiAlertDialogTitle>
           <UiAlertDialogDescription>
-            {{ $t('general.confirmationMessage') }}
+            {{ $t("general.confirmationMessage") }}
           </UiAlertDialogDescription>
         </UiAlertDialogHeader>
         <UiAlertDialogFooter>
@@ -24,7 +24,7 @@
   const open = ref(false);
 
   const emits = defineEmits<{
-    (e: 'confirm'): void
-    (e: 'cancel'): void
-  }>()
+    (e: "confirm"): void;
+    (e: "cancel"): void;
+  }>();
 </script>

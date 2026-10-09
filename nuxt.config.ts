@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "nuxt-auth-utils",
     "@nuxtjs/i18n",
-    "@yuta-inoue-ph/nuxt-vcalendar"
+    "@yuta-inoue-ph/nuxt-vcalendar",
   ],
 
   imports: {
@@ -56,8 +56,8 @@ export default defineNuxtConfig({
   i18n: {
     locales: [
       { code: "en-US", name: "English", file: "en-US.json" },
-      { code: "de-DE", name: "Deutsch", file: "de-DE.json" }
+      { code: "de-DE", name: "Deutsch", file: "de-DE.json" },
     ],
-    defaultLocale: "en-US"
-  }
+    defaultLocale: "en-US",
+  },
 });

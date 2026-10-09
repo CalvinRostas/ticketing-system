@@ -1,11 +1,11 @@
 <template>
   <div class="space-y-5">
     <h1 class="text-2xl font-bold">Hey, {{ user?.firstname }}</h1>
-    <div class="w-full grid md:grid-cols-3 grid-cols-1 gap-3 items-center">
+    <div class="grid w-full grid-cols-1 items-center gap-3 md:grid-cols-3">
       <UiCard>
         <UiCardContent>
           <div class="flex items-center gap-5 font-bold">
-            <div class="text-muted-foreground border p-3 rounded-md">
+            <div class="text-muted-foreground rounded-md border p-3">
               <Icon name="lucide:notepad-text" class="size-6" />
             </div>
             <div>
@@ -18,11 +18,11 @@
       <UiCard>
         <UiCardContent>
           <div class="flex items-center gap-5 font-bold">
-            <div class="text-muted-foreground border p-3 rounded-md">
+            <div class="text-muted-foreground rounded-md border p-3">
               <Icon name="lucide:folder-kanban" class="size-6" />
             </div>
             <div>
-              <h1 class="text-(--chart-4) text-2xl">{{ data?.openTickets.length ?? 0 }}</h1>
+              <h1 class="text-2xl text-(--chart-4)">{{ data?.openTickets.length ?? 0 }}</h1>
               <p class="text-muted-foreground">Assigned Projects</p>
             </div>
           </div>
@@ -31,7 +31,7 @@
       <UiCard>
         <UiCardContent>
           <div class="flex items-center gap-5 font-bold">
-            <div class="text-muted-foreground border p-3 rounded-md">
+            <div class="text-muted-foreground rounded-md border p-3">
               <Icon name="lucide:clock" class="size-6" />
             </div>
             <div>
@@ -57,8 +57,12 @@
       </UiTableHeader>
       <tbody aria-hidden="true" class="table-row h-2" />
       <UiTableBody class="[&_td:first-child]:rounded-l-lg [&_td:last-child]:rounded-r-lg">
-        <UiTableRow v-for="item in ticketData?.data" :key="item.id"
-          class="odd:bg-muted/50 odd:hover:bg-muted/90 border-none hover:bg-muted/90 cursor-pointer" @click="navigateTo($localePath(`/ticket/${item.id}`))">
+        <UiTableRow
+          v-for="item in ticketData?.data"
+          :key="item.id"
+          class="odd:bg-muted/50 odd:hover:bg-muted/90 hover:bg-muted/90 cursor-pointer border-none"
+          @click="navigateTo($localePath(`/ticket/${item.id}`))"
+        >
           <UiTableCell class="py-2.5">{{ item.id }}</UiTableCell>
           <UiTableCell class="py-2.5 font-medium">{{ item.title }}</UiTableCell>
           <UiTableCell class="py-2.5">{{ formatDescription(item.description!) }}</UiTableCell>
@@ -68,12 +72,20 @@
           <UiTableCell class="py-2.5">
             <UtilBadge :label="item.status.name" :color="item.status.color!" />
           </UiTableCell>
-          <UiTableCell class="py-2.5">{{ new Date(item.dueDate as string).toLocaleDateString(locale) }}</UiTableCell>
-          <UiTableCell class="py-2.5 text-right">{{item.categories.map(c => c.name).join(", ")}}</UiTableCell>
-          <UiTableCell class="py-2.5 text-right flex items-center justify-end gap-4">
+          <UiTableCell class="py-2.5">{{
+            new Date(item.dueDate as string).toLocaleDateString(locale)
+          }}</UiTableCell>
+          <UiTableCell class="py-2.5 text-right">{{
+            item.categories.map((c) => c.name).join(", ")
+          }}</UiTableCell>
+          <UiTableCell class="flex items-center justify-end gap-4 py-2.5 text-right">
             <template v-if="item.assignees">
-              <div class="flex flex-wrap gap-2 items-center" v-for="assignee in item.assignees" :key="assignee.id"
-                v-if="item.assignees.length < 2">
+              <div
+                class="flex flex-wrap items-center gap-2"
+                v-for="assignee in item.assignees"
+                :key="assignee.id"
+                v-if="item.assignees.length < 2"
+              >
                 <UiAvatar :src="assignee.avatarUrl">
                   <UiAvatarFallback>
                     {{ assignee.firstname!.charAt(0) }}{{ assignee.lastname!.charAt(0) }}
@@ -84,7 +96,10 @@
               <UiAvatarGroup class="grayscale" v-else>
                 <UiAvatar v-for="assignee in item.assignees" :key="assignee.id">
                   <UiAvatarImage :src="assignee.avatarUrl" :alt="assignee.firstname!" />
-                  <UiAvatarFallback>{{ assignee.firstname!.charAt(0) }}{{ assignee.lastname!.charAt(0) }}</UiAvatarFallback>
+                  <UiAvatarFallback
+                    >{{ assignee.firstname!.charAt(0)
+                    }}{{ assignee.lastname!.charAt(0) }}</UiAvatarFallback
+                  >
                 </UiAvatar>
               </UiAvatarGroup>
             </template>
@@ -102,34 +117,34 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  middleware: "auth",
-})
+  definePageMeta({
+    middleware: "auth",
+  });
 
-const { loggedIn, user } = useUserSession()
-const { locale } = useI18n()
+  const { loggedIn, user } = useUserSession();
+  const { locale } = useI18n();
 
-const { data, error } = await useFetch("/api/internal/user/overview")
-if (error.value) {
-  console.error(error.value)
-}
-
-const { data: ticketData, error: ticketError } = await useFetch("/api/ticket/list", {
-  method: "GET",
-  params: {
-    page: 1,
-    pageSize: 10,
-    author: user.value?.id,
-    isClosed: false,
+  const { data, error } = await useFetch("/api/internal/user/overview");
+  if (error.value) {
+    console.error(error.value);
   }
-})
 
-const formatDescription = (description: string) => {
-  description = description.replace(/<\/?[^>]+(>|$)/g, "") // Remove all HTML tags
-  if (!description) return ""
-  if (description.length <= 50) return description
-  return description.slice(0, 50) + "..."
-}
+  const { data: ticketData, error: ticketError } = await useFetch("/api/ticket/list", {
+    method: "GET",
+    params: {
+      page: 1,
+      pageSize: 10,
+      author: user.value?.id,
+      isClosed: false,
+    },
+  });
+
+  const formatDescription = (description: string) => {
+    description = description.replace(/<\/?[^>]+(>|$)/g, ""); // Remove all HTML tags
+    if (!description) return "";
+    if (description.length <= 50) return description;
+    return description.slice(0, 50) + "...";
+  };
 </script>
 
 <style scoped></style>
